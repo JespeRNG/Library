@@ -21,15 +21,15 @@ namespace Library
         {
             InitializeComponent();
 
-
             /*using (var context = new MyDbContext())
             {
-                
                 var reader = new Reader()
                 {
-                    LastName = "Fediuk",
-                    FirstName = "Yaroslav",
-                    MiddleName = "Viacheslavovich"
+                    LastName = "Polishchuk",
+                    FirstName = "Andriy",
+                    MiddleName = "Oleksiyovich",
+                    TicketNumber = 124,
+                    DateOfTicketIssue = new DateTime(2021, 2, 23).ToString("dd.MM.yyyy")
                 };
 
                 context.Readers.Add(reader);
