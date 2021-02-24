@@ -15,7 +15,10 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
 using System.Data;
+<<<<<<< HEAD
 
+=======
+>>>>>>> bc660f6a5b013c6ea0d50d1053bd734f88fe1c45
 
 namespace Library
 {
@@ -31,10 +34,10 @@ namespace Library
             {
                 var reader = new Reader()
                 {
-                    LastName = "Polishchuk",
-                    FirstName = "Andriy",
-                    MiddleName = "Oleksiyovich",
-                    TicketNumber = 124,
+                    LastName = "Fediuk",
+                    FirstName = "Yaroslav",
+                    MiddleName = "Viacheslavovich",
+                    TicketNumber = 125,
                     DateOfTicketIssue = new DateTime(2021, 2, 23).ToString("dd.MM.yyyy")
                 };
 
@@ -45,7 +48,12 @@ namespace Library
             }*/
 
             bindDataGrid();
+<<<<<<< HEAD
          }
+=======
+            //ReadersGrid.Columns[0].Visibility = Visibility.Hidden;
+        }
+>>>>>>> bc660f6a5b013c6ea0d50d1053bd734f88fe1c45
 
         private void bindDataGrid()
         {
@@ -59,11 +67,19 @@ namespace Library
             con.Close();
 
             ReadersGrid.ItemsSource = dt.DefaultView;
+<<<<<<< HEAD
         }
 
         private void ButtonAdd_Click(object sender, RoutedEventArgs e)
         {   
             addWindow.Show();
+=======
+            //ReadersGrid.Columns[0].Visibility = Visibility.Hidden;
+        }
+
+        private void ButtonAdd_Click(object sender, RoutedEventArgs e)
+        {
+>>>>>>> bc660f6a5b013c6ea0d50d1053bd734f88fe1c45
         }
     }
 }
