@@ -11,7 +11,6 @@ namespace Library
     {
         public MyDbContext() : base("DbConnectionString")
         {
-
         }
 
         public DbSet<Book> Catalog { get; set; }
