@@ -7,29 +7,33 @@
         xmlns:local="clr-namespace:Library"
         mc:Ignorable="d"
         Title="AddWindow" Height="591.892" Width="554.054">
-    <Grid Background="#FF0F141B" Margin="0,0,-193,0">
+    <Window.Effect>
+        <DropShadowEffect/>
+    </Window.Effect>
+    <Grid Background="#FF0F141B">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="420*"/>
-            <ColumnDefinition Width="223*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
         <Label x:Name="LabelFirstName" Content="First Name" Foreground="#FFE0E0E0" HorizontalAlignment="Left" Margin="42,143,0,0" VerticalAlignment="Top" Width="110" Height="33" Background="{x:Null}" FontSize="20"/>
         <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5"  HorizontalAlignment="Left" Height="33" Margin="192,143,0,0" VerticalAlignment="Top" Width="241" RenderTransformOrigin="0.5,0.5" Background="#FF403455">
             <TextBox TextWrapping="Wrap" Foreground="#FFE0E0E0" Text="" Margin="9,1,9,-1"/>
         </Border>
-        <Label x:Name="LabelLastName" Content="Last Name" HorizontalAlignment="Left" Margin="42,223,0,0" VerticalAlignment="Top" Width="110" Foreground="#FFE0E0E0" FontSize="20"/>
+        <Label x:Name="LabelLastName" Content="Last Name" HorizontalAlignment="Left" Margin="42,223,0,0" VerticalAlignment="Top" Width="110" Foreground="#FFE0E0E0" FontSize="20" Height="35"/>
         <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5"  HorizontalAlignment="Left" Height="33" Margin="192,223,0,0" VerticalAlignment="Top" Width="241" RenderTransformOrigin="0.5,0.5" Background="#FF403455">
             <TextBox TextWrapping="Wrap" Foreground="#FFE0E0E0" Text="" Margin="9,1,9,-1"/>
         </Border>
-        <Label x:Name="LabelMiddleName" Content="Middle Name" Foreground="#FFE0E0E0" HorizontalAlignment="Left" Margin="42,292,0,0" VerticalAlignment="Top" Width="130" FontSize="20"/>
+        <Label x:Name="LabelMiddleName" Content="Middle Name" Foreground="#FFE0E0E0" HorizontalAlignment="Left" Margin="42,292,0,0" VerticalAlignment="Top" Width="130" FontSize="20" Height="35"/>
         <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5"  HorizontalAlignment="Left" Height="33" Margin="192,294,0,0" VerticalAlignment="Top" Width="241" RenderTransformOrigin="0.5,0.5" Background="#FF403455">
             <TextBox TextWrapping="Wrap" Foreground="#FFE0E0E0" Text="" Margin="9,1,9,-1"/>
         </Border>
-        <Label x:Name="LabelTicketNumber" Content="Ticket number" Foreground="#FFE0E0E0" HorizontalAlignment="Left" Margin="42,367,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.491,0.512" Width="145" FontSize="20"/>
+        <Label x:Name="LabelTicketNumber" Content="Ticket number" Foreground="#FFE0E0E0" HorizontalAlignment="Left" Margin="42,367,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.491,0.512" Width="145" FontSize="20" Height="35"/>
         <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5"  HorizontalAlignment="Left" Height="33" Margin="192,367,0,0" VerticalAlignment="Top" Width="241" RenderTransformOrigin="0.5,0.5" Background="#FF403455">
             <TextBox TextWrapping="Wrap" Foreground="#FFE0E0E0" Text="" Margin="9,1,9,-1"/>
         </Border>
-        <Button Content="Save" BorderBrush="#FF0F141B" HorizontalAlignment="Left" Background="#FF403455" Margin="42,490,0,0" VerticalAlignment="Top" Width="100"/>
-        <Button Content="Cancel" BorderBrush="#FF0F141B" HorizontalAlignment="Left" Background="#FF403455" Margin="172,490,0,0" VerticalAlignment="Top" Width="100" Click="Button_Click"/>
+        <Button x:Name="SaveBtn" Content="Save" BorderBrush="#FF0F141B" HorizontalAlignment="Left" Background="#FF403455" Margin="42,490,0,0" VerticalAlignment="Top" Width="100" Click="SaveBtn_Click"/>
+        <Button x:Name="CancelBtn" Content="Cancel" BorderBrush="#FF0F141B" HorizontalAlignment="Left" Background="#FF403455" Margin="172,490,0,0" VerticalAlignment="Top" Width="100" Click="CancelBtn_Click"/>
 
     </Grid>
 </Window>

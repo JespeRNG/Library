@@ -21,6 +21,8 @@ namespace Library
 {
     public partial class MainWindow : Window
     {
+        private DataBase db = new DataBase();
+        private DataTable RecordsDt;
         public MainWindow()
         {
             InitializeComponent();
@@ -38,52 +40,24 @@ namespace Library
                 context.Readers.Add(reader);
                 context.SaveChanges();
             }*/
+            RecordsDt = new DataTable();
+            RecordsDt.Columns.Add("Reader Name");
+            RecordsDt.Columns.Add("Book");
+            RecordsDt.Columns.Add("Date of Issue");
+            RecordsDt.Columns.Add("Date Of Return");
+            RecordsDt.Columns.Add("Returned");
 
-            bindDataGrid();
-        }
-
-        private void bindDataGrid()
-        {
-            using (MyDbContext dbc = new MyDbContext())
-            {
-                dbc.Readers.Load();
-                ReadersGrid.ItemsSource = dbc.Readers.Local;
-
-                DataRow row;
-                DataTable dt = new DataTable();
-                dt.Columns.Add("Reader Name");
-                dt.Columns.Add("Book");
-                dt.Columns.Add("Date of Issue");
-                dt.Columns.Add("Date Of Return");
-                dt.Columns.Add("Returned");
-
-                foreach (var record in dbc.Records.ToList<Record>())
-                {
-                    var reader = (from r in dbc.Readers
-                                  where r.Id == record.ReaderId
-                                  select r).First();
-                    var book = (from b in dbc.Books
-                                where b.Id == record.BookId
-                                select b).First();
-                    row = dt.NewRow();
-                    row["Reader Name"] = reader.LastName + ' ' + reader.FirstName[0] + ". " + reader.MiddleName[0] + '.';
-                    row["Book"] = '"' + book.Name + '"';
-                    row["Date of Issue"] = record.DateOfIssue;
-                    row["Date Of Return"] = record.DateOfReturn;
-                    if (!record.Returned)
-                        row["Returned"] = "No";
-                    else
-                        row["Returned"] = "Yes";
-                    dt.Rows.Add(row);
-                }
-                RecordsGrid.ItemsSource = dt.DefaultView;
-            }
+            db.BindDataGrid(ReadersGrid, RecordsGrid, RecordsDt);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             AddWindow addWindow = new AddWindow();
             addWindow.ShowDialog();
+        }
+        private void ReadersGrid_GotFocus(object sender, RoutedEventArgs e)
+        {
+            //db.ChooseReader(RecordsDt);
         }
     }
 }
