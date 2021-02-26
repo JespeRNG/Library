@@ -10,7 +10,6 @@ namespace Library
     {
         public int Id { get; set; }
         public string Name { get; set; } // Book name
-        public string Authors { get; set; } // Authors of the book
         public string LibraryCode { get; set; } // Library code of the book
         public int PublicationYear { get; set; } // Year of publication
         public string PublicationPlace { get; set; } // Place of publication

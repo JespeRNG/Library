@@ -27,12 +27,34 @@ namespace Library
         {
             InitializeComponent();
 
+<<<<<<< HEAD
+=======
+            /*using (var context = new MyDbContext())
+            {
+                var reader = new Reader()
+                {
+                    LastName = "Polishchuk",
+                    FirstName = "Andriy",
+                    MiddleName = "Oleksiyovich",
+                    TicketNumber = 126,
+                    DateOfTicketIssue = new DateTime(2021, 2, 23).ToString("dd.MM.yyyy")
+                };
+                context.Readers.Add(reader);
+                context.SaveChanges();
+            }*/
+>>>>>>> 2d27976e1df0c83e241f1461adc19c430909295e
             RecordsDt = new DataTable();
             RecordsDt.Columns.Add("Reader Name");
             RecordsDt.Columns.Add("Book");
             RecordsDt.Columns.Add("Date of Issue");
             RecordsDt.Columns.Add("Date Of Return");
             RecordsDt.Columns.Add("Returned");
+<<<<<<< HEAD
+=======
+
+            db.BindDataGrid(ReadersGrid, RecordsGrid, RecordsDt);
+        }
+>>>>>>> 2d27976e1df0c83e241f1461adc19c430909295e
 
             db.BindDataGrid(ReadersGrid, RecordsGrid, RecordsDt);
         }
@@ -42,6 +64,13 @@ namespace Library
         {
             AddWindow addWindow = new AddWindow();
             addWindow.ShowDialog();
+<<<<<<< HEAD
+=======
+        }
+        private void ReadersGrid_GotFocus(object sender, RoutedEventArgs e)
+        {
+            //db.ChooseReader(RecordsDt);
+>>>>>>> 2d27976e1df0c83e241f1461adc19c430909295e
         }
     }
 }

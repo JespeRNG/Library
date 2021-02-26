@@ -26,9 +26,14 @@ namespace Library
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void CancelBtn_Click(object sender, RoutedEventArgs e)
         {
-            this.Hide();
+            this.Close();
+        }
+
+        private void SaveBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
 
         //Adding reader in DB

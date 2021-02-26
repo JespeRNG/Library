@@ -1,4 +1,5 @@
 ﻿using System;
+<<<<<<< HEAD
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -12,6 +13,22 @@ namespace Library
 {
     public class DataBase : AddWindow
     {
+=======
+using System.Windows;
+using System.Windows.Controls;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data.Entity;
+using System.Data;
+
+namespace Library
+{
+    public class DataBase
+    {
+
+>>>>>>> 2d27976e1df0c83e241f1461adc19c430909295e
         public void BindDataGrid(DataGrid ReadersGrid, DataGrid RecordsGrid, DataTable RecordsDt)
         {
             RecordsDt.Clear();
@@ -74,6 +91,7 @@ namespace Library
                 RecordsGrid.ItemsSource = RecordsDt.DefaultView;
             }
         }
+<<<<<<< HEAD
 
         //Function adding reader
         public void AddReader(string firstName, string lastName, string middleName, string ticketNumber)
@@ -94,5 +112,7 @@ namespace Library
         {
 
         }
+=======
+>>>>>>> 2d27976e1df0c83e241f1461adc19c430909295e
     }
 }
