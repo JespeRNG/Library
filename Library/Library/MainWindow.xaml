@@ -6,44 +6,28 @@
         xmlns:local="clr-namespace:Library"
         WindowStartupLocation="CenterScreen"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-<<<<<<< HEAD
-        mc:Ignorable="d" ResizeMode="NoResize" Height="703.448" Width="1048.633" Background="#FF061623">
-    <Grid HorizontalAlignment="Left" Height="672" VerticalAlignment="Top" Width="1039" Background="#FF0F141B">
-        <DataGrid x:Name="ReadersGrid" HorizontalAlignment="Left" Height="435" Margin="26,128,0,0" VerticalAlignment="Top" Width="622" Background="#FF817B75"/>
-        <Label Content="Search" HorizontalAlignment="Left" Margin="26,22,0,0" VerticalAlignment="Top" Width="85" FontSize="24" Foreground="#FFE0E0E0"/>
-        <Border BorderBrush="Black" CornerRadius="7" BorderThickness="1" HorizontalAlignment="Left" Height="31" Margin="116,28,0,0" VerticalAlignment="Top" Width="167" Background="#FF403455">
-            <TextBox TextWrapping="Wrap" Text="" Margin="9,-1" FontSize="14" Foreground="#FFE0E0E0"/>
-        </Border>
-        <DataGrid x:Name="RecordsGrid" HorizontalAlignment="Left" Height="435" Margin="670,128,0,0" VerticalAlignment="Top" Width="322" Background="#FF817B75"/>
-        <Label Content="Readers" HorizontalAlignment="Left" Margin="256,73,0,0" VerticalAlignment="Top" Height="50" FontSize="36" Foreground="#FFE0E0E0"/>
-        <Label Content="Records" HorizontalAlignment="Left" Margin="766,73,0,0" VerticalAlignment="Top" FontSize="36" Foreground="#FFE0E0E0"/>
-        <Border BorderBrush="#FF0F141B" BorderThickness="1" HorizontalAlignment="Left" Height="5" Margin="0,73,0,0" VerticalAlignment="Top" Width="1039" Background="#FF262130"/>
-        <Button Content="Add reader" HorizontalAlignment="Left" Margin="26,586,0,0" VerticalAlignment="Top" Width="136" Background="#FF403455" BorderBrush="#FF0F141B" Click="Button_Click"/>
-        <Button Content="Edit" HorizontalAlignment="Left" Margin="565,586,0,0" VerticalAlignment="Top" Width="83" Background="#FF403455" BorderBrush="#FF0F141B"/>
-        <Button Content="Remove" HorizontalAlignment="Left" Margin="464,586,0,0" VerticalAlignment="Top" Width="86" Background="#FF403455" BorderBrush="#FF0F141B"/>
-=======
         mc:Ignorable="d" ResizeMode="NoResize" Height="703.448" Width="1300.633" Background="#FF061623">
     <Grid HorizontalAlignment="Left" Height="672" VerticalAlignment="Top" Width="1301" Background="#FF0F141B" Margin="0,0,-6,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="ReadersGrid" HorizontalAlignment="Left" Height="435" Margin="26,128,0,0" VerticalAlignment="Top" Width="621" Background="#FF817B75" GridLinesVisibility="All" IsReadOnly="True" GotFocus="ReadersGrid_GotFocus">
+        <DataGrid x:Name="ReadersGrid" HorizontalAlignment="Left" Height="435" Margin="26,128,0,0" VerticalAlignment="Top" Width="621" Background="#FF817B75" GridLinesVisibility="All" IsReadOnly="True" MouseLeftButtonUp="DataGrid_MouseLeftButtonUp">
         </DataGrid>
         <Label Content="Search" HorizontalAlignment="Left" Margin="26,22,0,0" VerticalAlignment="Top" Width="85" FontSize="24" Foreground="#FFE0E0E0" Height="40"/>
         <Border BorderBrush="Black" CornerRadius="7" BorderThickness="1" HorizontalAlignment="Left" Height="31" Margin="116,28,0,0" VerticalAlignment="Top" Width="167" Background="#FF403455">
             <TextBox TextWrapping="Wrap" Text="" Margin="9,-1" FontSize="14" Foreground="#FFE0E0E0"/>
         </Border>
         <DataGrid x:Name="RecordsGrid" HorizontalAlignment="Left" Height="435" Margin="670,128,0,0" VerticalAlignment="Top" Width="583" GridLinesVisibility="All" IsReadOnly="True" Background="#FF817B75"/>
-        <Label Content="Readers" HorizontalAlignment="Left" Margin="284,73,0,0" VerticalAlignment="Top" Height="50" FontSize="36" Foreground="#FFE0E0E0" Width="133"/>
-        <Label Content="Records" HorizontalAlignment="Left" Margin="905,73,0,0" VerticalAlignment="Top" FontSize="36" Foreground="#FFE0E0E0" Height="56" Width="134"/>
-        <Border BorderBrush="#FF0F141B" BorderThickness="1" HorizontalAlignment="Left" Height="5" Margin="0,73,-1,0" VerticalAlignment="Top" Width="1302" Background="#FF262130" Grid.ColumnSpan="2"/>
-        <Button Content="Add reader" HorizontalAlignment="Left" Margin="26,586,0,0" VerticalAlignment="Top" Width="136" Background="#FF403455" BorderBrush="#FF0F141B" Click="Button_Click"/>
-        <Button Content="Edit" HorizontalAlignment="Left" Margin="277,586,0,0" VerticalAlignment="Top" Width="82" Background="#FF403455" BorderBrush="#FF0F141B"/>
-        <Button Content="Remove" HorizontalAlignment="Left" Margin="175,586,0,0" VerticalAlignment="Top" Width="86" Background="#FF403455" BorderBrush="#FF0F141B"/>
->>>>>>> 2d27976e1df0c83e241f1461adc19c430909295e
-        <Button Content="Add" HorizontalAlignment="Left" Margin="670,586,0,0" VerticalAlignment="Top" Width="75" Background="#FF403455" BorderBrush="#FF0F141B"/>
-        <Button Content="Edit" HorizontalAlignment="Left" Margin="761,586,0,0" VerticalAlignment="Top" Width="75" Background="#FF403455" BorderBrush="#FF0F141B"/>
+        <Label Content="Readers" HorizontalAlignment="Left" Margin="270,73,0,0" VerticalAlignment="Top" Height="50" FontSize="36" Foreground="#FFE0E0E0" Width="133"/>
+        <Label Content="Records" HorizontalAlignment="Left" Margin="6,73,-140,0" VerticalAlignment="Top" FontSize="36" Foreground="#FFE0E0E0" Height="56" Width="134" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <Border BorderBrush="#FF0F141B" BorderThickness="1" HorizontalAlignment="Left" Height="5" Margin="0,73,-1,0" VerticalAlignment="Top" Width="1302" Background="#FF262130" Grid.ColumnSpan="3"/>
+        <Button x:Name="AddReaderBtn" Content="Add Reader" HorizontalAlignment="Left" Margin="26,586,0,0" VerticalAlignment="Top" Width="140" Background="#FF403455" BorderBrush="#FF0F141B" Click="AddReaderBtn_Click"/>
+        <Button Content="Edit" HorizontalAlignment="Left" Margin="283,586,0,0" VerticalAlignment="Top" Width="82" Background="#FF403455" BorderBrush="#FF0F141B"/>
+        <Button Content="Remove" HorizontalAlignment="Left" Margin="181,586,0,0" VerticalAlignment="Top" Width="86" Background="#FF403455" BorderBrush="#FF0F141B"/>
+        <Button x:Name="AddRecordBtn" Content="Add Record" HorizontalAlignment="Left" Margin="670,586,0,0" VerticalAlignment="Top" Width="140" Background="#FF403455" BorderBrush="#FF0F141B" IsEnabled="False" Click="AddRecordBtn_Click"/>
+        <Button Content="Edit" HorizontalAlignment="Left" Margin="825,586,0,0" VerticalAlignment="Top" Width="75" Background="#FF403455" BorderBrush="#FF0F141B"/>
     </Grid>
 
 

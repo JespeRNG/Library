@@ -27,8 +27,6 @@ namespace Library
         {
             InitializeComponent();
 
-<<<<<<< HEAD
-=======
             /*using (var context = new MyDbContext())
             {
                 var reader = new Reader()
@@ -42,35 +40,37 @@ namespace Library
                 context.Readers.Add(reader);
                 context.SaveChanges();
             }*/
->>>>>>> 2d27976e1df0c83e241f1461adc19c430909295e
             RecordsDt = new DataTable();
             RecordsDt.Columns.Add("Reader Name");
             RecordsDt.Columns.Add("Book");
             RecordsDt.Columns.Add("Date of Issue");
             RecordsDt.Columns.Add("Date Of Return");
             RecordsDt.Columns.Add("Returned");
-<<<<<<< HEAD
-=======
-
-            db.BindDataGrid(ReadersGrid, RecordsGrid, RecordsDt);
-        }
->>>>>>> 2d27976e1df0c83e241f1461adc19c430909295e
 
             db.BindDataGrid(ReadersGrid, RecordsGrid, RecordsDt);
         }
 
-        //Button addReader_Click()
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void DataGrid_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            AddRecordBtn.IsEnabled = true;
+            using (var context = new MyDbContext())
+            {
+                List<Reader> list = context.Readers.ToList<Reader>();
+                db.ChooseReader(list[ReadersGrid.SelectedIndex].Id, RecordsGrid, RecordsDt);
+            }
+        }
+
+        private void AddReaderBtn_Click(object sender, RoutedEventArgs e)
         {
             AddWindow addWindow = new AddWindow();
             addWindow.ShowDialog();
-<<<<<<< HEAD
-=======
+            db.BindDataGrid(ReadersGrid, RecordsGrid, RecordsDt); //Refreshing Data Table after saving changes
         }
-        private void ReadersGrid_GotFocus(object sender, RoutedEventArgs e)
+
+        private void AddRecordBtn_Click(object sender, RoutedEventArgs e)
         {
-            //db.ChooseReader(RecordsDt);
->>>>>>> 2d27976e1df0c83e241f1461adc19c430909295e
+            /*AddRecordWindow wn = new AddRecordWindow();
+            wn.ShowDialog();*/
         }
     }
 }

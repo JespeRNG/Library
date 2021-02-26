@@ -1,19 +1,4 @@
 ﻿using System;
-<<<<<<< HEAD
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-
-namespace Library
-{
-    public class DataBase : AddWindow
-    {
-=======
 using System.Windows;
 using System.Windows.Controls;
 using System.Collections.Generic;
@@ -27,8 +12,7 @@ namespace Library
 {
     public class DataBase
     {
-
->>>>>>> 2d27976e1df0c83e241f1461adc19c430909295e
+        // Method for Setting/Refreshing data tables
         public void BindDataGrid(DataGrid ReadersGrid, DataGrid RecordsGrid, DataTable RecordsDt)
         {
             RecordsDt.Clear();
@@ -39,19 +23,21 @@ namespace Library
 
                 DataRow row;
 
-                foreach (var record in dbc.Records.ToList<Record>())
+                foreach (var record in dbc.Records.ToList<Record>()) // for every record in Records
                 {
-                    var reader = (from r in dbc.Readers
+                    var reader = (from r in dbc.Readers // Getting reader where reader.Id == record.ReaderId
                                   where r.Id == record.ReaderId
                                   select r).First();
-                    var book = (from b in dbc.Books
+                    var book = (from b in dbc.Books // Getting reader where reader.Id == record.ReaderId
                                 where b.Id == record.BookId
                                 select b).First();
+
                     row = RecordsDt.NewRow();
                     row["Reader Name"] = reader.LastName + ' ' + reader.FirstName[0] + ". " + reader.MiddleName[0] + '.';
                     row["Book"] = '"' + book.Name + '"';
                     row["Date of Issue"] = record.DateOfIssue;
                     row["Date Of Return"] = record.DateOfReturn;
+
                     if (!record.Returned)
                         row["Returned"] = "No";
                     else
@@ -67,52 +53,51 @@ namespace Library
             using (MyDbContext dbc = new MyDbContext())
             {
                 DataRow row;
+
                 foreach (var record in dbc.Records.ToList<Record>())
                 {
-                    var reader = (from r in dbc.Readers
-                                  where r.Id == id
-                                  select r).First();
-                    var book = (from b in dbc.Books
-                                where b.Id == record.BookId
-                                select b).First();
+                    if(record.ReaderId == id)
+                    {
+                        var reader = (from r in dbc.Readers
+                                      where r.Id == id
+                                      select r).First();
+                        var book = (from b in dbc.Books
+                                    where b.Id == record.BookId
+                                    select b).First();
 
-
-                    row = RecordsDt.NewRow();
-                    row["Reader Name"] = reader.LastName + ' ' + reader.FirstName[0] + ". " + reader.MiddleName[0] + '.';
-                    row["Book"] = '"' + book.Name + '"';
-                    row["Date of Issue"] = record.DateOfIssue;
-                    row["Date Of Return"] = record.DateOfReturn;
-                    if (!record.Returned)
-                        row["Returned"] = "No";
-                    else
-                        row["Returned"] = "Yes";
-                    RecordsDt.Rows.Add(row);
+                        row = RecordsDt.NewRow();
+                        row["Reader Name"] = reader.LastName + ' ' + reader.FirstName[0] + ". " + reader.MiddleName[0] + '.';
+                        row["Book"] = '"' + book.Name + '"';
+                        row["Date of Issue"] = record.DateOfIssue;
+                        row["Date Of Return"] = record.DateOfReturn;
+                        if (!record.Returned)
+                            row["Returned"] = "No";
+                        else
+                            row["Returned"] = "Yes";
+                        RecordsDt.Rows.Add(row);
+                    }
                 }
                 RecordsGrid.ItemsSource = RecordsDt.DefaultView;
             }
         }
-<<<<<<< HEAD
-
-        //Function adding reader
         public void AddReader(string firstName, string lastName, string middleName, string ticketNumber)
         {
             using (MyDbContext db = new MyDbContext())
             {
-
                 Reader reader = new Reader { FirstName = firstName, LastName = lastName, MiddleName = middleName, TicketNumber = Convert.ToInt32(ticketNumber), DateOfTicketIssue = DateTime.Now.ToString("dd.MM.yyyy") };
 
                 db.Readers.Add(reader); //adding
-                db.SaveChanges();   //saving changes       
+                db.SaveChanges(); //saving changes       
             }
             MessageBox.Show("Saved");
         }
 
-        //Function edit reader
-        public void EditReader()
+        public void AddRecord()
         {
+            using (MyDbContext db = new MyDbContext())
+            {
 
+            }
         }
-=======
->>>>>>> 2d27976e1df0c83e241f1461adc19c430909295e
     }
 }

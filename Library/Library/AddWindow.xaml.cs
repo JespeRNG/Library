@@ -14,31 +14,20 @@ using System.Windows.Shapes;
 
 namespace Library
 {
-    /// <summary>
-    /// Логика взаимодействия для AddWindow.xaml
-    /// </summary>
     public partial class AddWindow : Window
     {
         
         public AddWindow()
         {
-           
             InitializeComponent();
         }
-
         private void CancelBtn_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-        }
-
-        //Adding reader in DB
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
             DataBase addr = new DataBase();
             addr.AddReader(TextBoxFirstName.Text, TextBoxLastName.Text, TextBoxMiddleName.Text, TextBoxTicketNumber.Text);
         }
