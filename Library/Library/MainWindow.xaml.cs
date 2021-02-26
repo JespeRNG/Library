@@ -15,21 +15,33 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
 using System.Data;
+using System.Data.Entity;
 
 namespace Library
 {
     public partial class MainWindow : Window
     {
-        AddWindow addWindow = new AddWindow();
+        private DataBase db = new DataBase();
+        private DataTable RecordsDt;
         public MainWindow()
         {
             InitializeComponent();
 
-         }
+            RecordsDt = new DataTable();
+            RecordsDt.Columns.Add("Reader Name");
+            RecordsDt.Columns.Add("Book");
+            RecordsDt.Columns.Add("Date of Issue");
+            RecordsDt.Columns.Add("Date Of Return");
+            RecordsDt.Columns.Add("Returned");
 
+            db.BindDataGrid(ReadersGrid, RecordsGrid, RecordsDt);
+        }
+
+        //Button addReader_Click()
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            addWindow.Show();
+            AddWindow addWindow = new AddWindow();
+            addWindow.ShowDialog();
         }
     }
 }

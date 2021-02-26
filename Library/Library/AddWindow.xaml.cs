@@ -30,5 +30,12 @@ namespace Library
         {
             this.Hide();
         }
+
+        //Adding reader in DB
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            DataBase addr = new DataBase();
+            addr.AddReader(TextBoxFirstName.Text, TextBoxLastName.Text, TextBoxMiddleName.Text, TextBoxTicketNumber.Text);
+        }
     }
 }

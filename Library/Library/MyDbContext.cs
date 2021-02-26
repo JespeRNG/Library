@@ -13,7 +13,7 @@ namespace Library
         {
         }
 
-        public DbSet<Book> Catalog { get; set; }
+        public DbSet<Book> Books { get; set; }
         public DbSet<Reader> Readers { get; set; }
         public DbSet<Record> Records { get; set; }
         public DbSet<Author> Authors { get; set; }

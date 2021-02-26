@@ -14,21 +14,21 @@
         </Grid.ColumnDefinitions>
         <Label x:Name="LabelFirstName" Content="First Name" Foreground="#FFE0E0E0" HorizontalAlignment="Left" Margin="42,143,0,0" VerticalAlignment="Top" Width="110" Height="33" Background="{x:Null}" FontSize="20"/>
         <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5"  HorizontalAlignment="Left" Height="33" Margin="192,143,0,0" VerticalAlignment="Top" Width="241" RenderTransformOrigin="0.5,0.5" Background="#FF403455">
-            <TextBox TextWrapping="Wrap" Foreground="#FFE0E0E0" Text="" Margin="9,1,9,-1"/>
+            <TextBox x:Name="TextBoxFirstName" TextWrapping="Wrap" Foreground="#FFE0E0E0" Text="" Margin="9,1,9,-1"/>
         </Border>
         <Label x:Name="LabelLastName" Content="Last Name" HorizontalAlignment="Left" Margin="42,223,0,0" VerticalAlignment="Top" Width="110" Foreground="#FFE0E0E0" FontSize="20"/>
         <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5"  HorizontalAlignment="Left" Height="33" Margin="192,223,0,0" VerticalAlignment="Top" Width="241" RenderTransformOrigin="0.5,0.5" Background="#FF403455">
-            <TextBox TextWrapping="Wrap" Foreground="#FFE0E0E0" Text="" Margin="9,1,9,-1"/>
+            <TextBox x:Name="TextBoxLastName" TextWrapping="Wrap" Foreground="#FFE0E0E0" Text="" Margin="9,1,9,-1"/>
         </Border>
         <Label x:Name="LabelMiddleName" Content="Middle Name" Foreground="#FFE0E0E0" HorizontalAlignment="Left" Margin="42,292,0,0" VerticalAlignment="Top" Width="130" FontSize="20"/>
         <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5"  HorizontalAlignment="Left" Height="33" Margin="192,294,0,0" VerticalAlignment="Top" Width="241" RenderTransformOrigin="0.5,0.5" Background="#FF403455">
-            <TextBox TextWrapping="Wrap" Foreground="#FFE0E0E0" Text="" Margin="9,1,9,-1"/>
+            <TextBox x:Name="TextBoxMiddleName" TextWrapping="Wrap" Foreground="#FFE0E0E0" Text="" Margin="9,1,9,-1"/>
         </Border>
         <Label x:Name="LabelTicketNumber" Content="Ticket number" Foreground="#FFE0E0E0" HorizontalAlignment="Left" Margin="42,367,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.491,0.512" Width="145" FontSize="20"/>
         <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5"  HorizontalAlignment="Left" Height="33" Margin="192,367,0,0" VerticalAlignment="Top" Width="241" RenderTransformOrigin="0.5,0.5" Background="#FF403455">
-            <TextBox TextWrapping="Wrap" Foreground="#FFE0E0E0" Text="" Margin="9,1,9,-1"/>
+            <TextBox x:Name="TextBoxTicketNumber" TextWrapping="Wrap" Foreground="#FFE0E0E0" Text="" Margin="9,1,9,-1"/>
         </Border>
-        <Button Content="Save" BorderBrush="#FF0F141B" HorizontalAlignment="Left" Background="#FF403455" Margin="42,490,0,0" VerticalAlignment="Top" Width="100"/>
+        <Button x:Name="ButtonSave" Content="Save" BorderBrush="#FF0F141B" HorizontalAlignment="Left" Background="#FF403455" Margin="42,490,0,0" VerticalAlignment="Top" Width="100" Click="Button_Click_1"/>
         <Button Content="Cancel" BorderBrush="#FF0F141B" HorizontalAlignment="Left" Background="#FF403455" Margin="172,490,0,0" VerticalAlignment="Top" Width="100" Click="Button_Click"/>
 
     </Grid>
