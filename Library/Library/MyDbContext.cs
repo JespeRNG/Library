@@ -12,7 +12,6 @@ namespace Library
         public MyDbContext() : base("DbConnectionString")
         {
         }
-
         public DbSet<Book> Books { get; set; }
         public DbSet<Reader> Readers { get; set; }
         public DbSet<Record> Records { get; set; }

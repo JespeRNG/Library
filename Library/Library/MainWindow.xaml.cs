@@ -23,6 +23,7 @@ namespace Library
     {
         private DataBase db = new DataBase();
         private DataTable RecordsDt;
+        private int readerId { get; set; }
         public MainWindow()
         {
             InitializeComponent();
@@ -52,25 +53,43 @@ namespace Library
 
         private void DataGrid_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            AddRecordBtn.IsEnabled = true;
-            using (var context = new MyDbContext())
+            try
             {
-                List<Reader> list = context.Readers.ToList<Reader>();
-                db.ChooseReader(list[ReadersGrid.SelectedIndex].Id, RecordsGrid, RecordsDt);
+                AddRecordBtn.IsEnabled = true;
+                using (var context = new MyDbContext())
+                {
+                    // Getting list of readers
+                    List<Reader> list = context.Readers.ToList<Reader>();
+                    // Calling method for loading data of chosen reader
+                    db.ChooseReader(list[ReadersGrid.SelectedIndex].Id, RecordsGrid, RecordsDt);
+                    readerId = list[ReadersGrid.SelectedIndex].Id;
+                }
             }
+            catch (System.ArgumentOutOfRangeException) { }
         }
 
         private void AddReaderBtn_Click(object sender, RoutedEventArgs e)
         {
             AddWindow addWindow = new AddWindow();
             addWindow.ShowDialog();
-            db.BindDataGrid(ReadersGrid, RecordsGrid, RecordsDt); //Refreshing Data Table after saving changes
+            //Refreshing Data Table after saving changes
+            db.BindDataGrid(ReadersGrid, RecordsGrid, RecordsDt); 
         }
 
         private void AddRecordBtn_Click(object sender, RoutedEventArgs e)
         {
-            /*AddRecordWindow wn = new AddRecordWindow();
-            wn.ShowDialog();*/
+            AddRecordWindow wn = new AddRecordWindow(readerId);
+            wn.ShowDialog();
+        }
+
+        private void RemoveReadersButton_Click(object sender, RoutedEventArgs e)
+        {
+            using (var context = new MyDbContext())
+            {
+                List<Reader> list = context.Readers.ToList<Reader>();
+                db.DeleteReader(list[ReadersGrid.SelectedIndex].Id);
+                db.BindDataGrid(ReadersGrid, RecordsGrid, RecordsDt);
+            }
         }
     }
 }

@@ -47,6 +47,43 @@ namespace Library
                 RecordsGrid.ItemsSource = RecordsDt.DefaultView;
             }
         }
+
+        public void LoadBooks(DataGrid DataGrid, DataTable DataTable)
+        {
+            DataTable.Clear();
+
+            using (MyDbContext dbc = new MyDbContext())
+            {
+                DataRow row;
+
+                foreach (var record in dbc.Books.ToList<Book>()) // for every record in Records
+                {
+                    var bookAuthor = (from a in dbc.BooksAuthors 
+                                      where a.BookId == record.Id 
+                                      select a.AuthorId).First();
+
+                    var author = (from a in dbc.Authors
+                                  where a.Id == bookAuthor
+                                  select a.LastName).First() + " " + (from a in dbc.Authors
+                                                                      where a.Id == bookAuthor
+                                                                      select a.FirstName).First();
+                    row = DataTable.NewRow();
+
+                    row["Book name"] = record.Name;
+                    row["Authors"] = author;
+                    row["Library code"] = record.LibraryCode;
+                    row["Publication year"] = record.PublicationYear;
+                    row["Publication place"] = record.PublicationPlace;
+                    row["Publishing name"] = record.PublishingName;
+                    row["Total amount"] = record.TotalAmount;
+                    row["Available amount"] = record.AvailableAmount;
+
+                    DataTable.Rows.Add(row);
+                }
+                DataGrid.ItemsSource = DataTable.DefaultView;
+            }
+        }
+
         public void ChooseReader(int id, DataGrid RecordsGrid, DataTable RecordsDt)
         {
             RecordsDt.Clear();
@@ -92,12 +129,36 @@ namespace Library
             MessageBox.Show("Saved");
         }
 
-        public void AddRecord()
+        public void AddRecord(int readerId, int bookId, string date)
         {
             using (MyDbContext db = new MyDbContext())
             {
+                var record = new Record()
+                {
+                    ReaderId = readerId,
+                    BookId = bookId,
+                    DateOfIssue = DateTime.Now.ToString("dd.MM.yyyy"),
+                    DateOfReturn = date,
+                    Returned = false
+                };
 
+                foreach (Book el in db.Books)
+                    if (el.Id == bookId)
+                        el.AvailableAmount--;
+
+                db.Records.Add(record);
+                db.SaveChanges();
             }
+        }
+        public void DeleteReader(int id)
+        {
+            using (MyDbContext db = new MyDbContext())
+            {
+                Reader reader = db.Readers.Find(id);
+                db.Readers.Remove(reader);
+                db.SaveChanges();
+            }
+            MessageBox.Show("Deleted");
         }
     }
 }
