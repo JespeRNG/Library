@@ -34,5 +34,7 @@
         </Border>
         <Button x:Name="SaveBtn" Content="Save" BorderBrush="#FF0F141B" HorizontalAlignment="Left" Background="#FF403455" Margin="42,490,0,0" VerticalAlignment="Top" Width="100" Click="SaveBtn_Click"/>
         <Button x:Name="CancelBtn" Content="Cancel" BorderBrush="#FF0F141B" HorizontalAlignment="Left" Background="#FF403455" Margin="172,490,0,0" VerticalAlignment="Top" Width="100" Click="CancelBtn_Click"/>
+        <Border BorderBrush="#FF0F141B" BorderThickness="1" HorizontalAlignment="Left" Height="5" Margin="0,80,-15,0" VerticalAlignment="Top" Width="561" Background="#FF262130" Grid.ColumnSpan="3"/>
+        <Label Content="Add reader" Foreground="#FFE0E0E0" HorizontalAlignment="Left" Margin="150,3,0,0" VerticalAlignment="Top" FontSize="48"/>
     </Grid>
 </Window>

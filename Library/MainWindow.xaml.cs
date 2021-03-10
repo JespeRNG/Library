@@ -24,9 +24,12 @@ namespace Library
         private DataBase db = new DataBase();
         private DataTable RecordsDt;
         private int readerId { get; set; }
+        
         public MainWindow()
         {
             InitializeComponent();
+
+           
 
             /*using (var context = new MyDbContext())
             {
@@ -49,6 +52,7 @@ namespace Library
             RecordsDt.Columns.Add("Returned");
 
             db.BindDataGrid(ReadersGrid, RecordsGrid, RecordsDt);
+            
         }
 
         private void DataGrid_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -56,6 +60,7 @@ namespace Library
             try
             {
                 AddRecordBtn.IsEnabled = true;
+                RemoveReadersButton.IsEnabled = true;
                 using (var context = new MyDbContext())
                 {
                     // Getting list of readers
@@ -65,7 +70,7 @@ namespace Library
                     readerId = list[ReadersGrid.SelectedIndex].Id;
                 }
             }
-            catch (System.ArgumentOutOfRangeException) { }
+            catch (ArgumentOutOfRangeException) { }
         }
 
         private void AddReaderBtn_Click(object sender, RoutedEventArgs e)
@@ -89,6 +94,44 @@ namespace Library
                 List<Reader> list = context.Readers.ToList<Reader>();
                 db.DeleteReader(list[ReadersGrid.SelectedIndex].Id);
                 db.BindDataGrid(ReadersGrid, RecordsGrid, RecordsDt);
+            }
+        }
+
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+            using (var context = new MyDbContext())
+            {
+                List<Reader> list = context.Readers.ToList<Reader>();
+                EditWindow editWindow = new EditWindow(list[ReadersGrid.SelectedIndex]);
+                editWindow.ShowDialog();
+            }
+            db.BindDataGrid(ReadersGrid, RecordsGrid, RecordsDt);
+        }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            using (var context = new MyDbContext())
+            {
+                //List<Reader> list = context.Readers.ToList<Reader>();
+
+
+                /*foreach (Reader rdr in list)
+                {
+                    if (rdr.Id == readerId)
+                    {
+                        MessageBox.Show("Old: "+rdr.LastName);
+                        Dim cell As DataGridCell = TryCast()
+                        rdr.LastName = ;
+                        rdr.FirstName = list[ReadersGrid.SelectedIndex].FirstName;
+                        rdr.MiddleName = list[ReadersGrid.SelectedIndex].MiddleName;
+                        rdr.TicketNumber = list[ReadersGrid.SelectedIndex].TicketNumber;
+                        rdr.DateOfTicketIssue = list[ReadersGrid.SelectedIndex].DateOfTicketIssue;
+                        MessageBox.Show("New: " + ReadersGrid.SelectedItem.ToString());
+                        break;
+                    }
+                }*/
+                //context.SaveChanges();
+                //SaveButton.Visibility = Visibility.Hidden;
             }
         }
     }

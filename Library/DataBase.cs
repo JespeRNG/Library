@@ -16,6 +16,7 @@ namespace Library
         public void BindDataGrid(DataGrid ReadersGrid, DataGrid RecordsGrid, DataTable RecordsDt)
         {
             RecordsDt.Clear();
+
             using (MyDbContext dbc = new MyDbContext())
             {
                 dbc.Readers.Load();
@@ -117,14 +118,22 @@ namespace Library
                 RecordsGrid.ItemsSource = RecordsDt.DefaultView;
             }
         }
+
         public void AddReader(string firstName, string lastName, string middleName, string ticketNumber)
         {
             using (MyDbContext db = new MyDbContext())
             {
-                Reader reader = new Reader { FirstName = firstName, LastName = lastName, MiddleName = middleName, TicketNumber = Convert.ToInt32(ticketNumber), DateOfTicketIssue = DateTime.Now.ToString("dd.MM.yyyy") };
+                Reader reader = new Reader 
+                { 
+                    FirstName = firstName, 
+                    LastName = lastName, 
+                    MiddleName = middleName, 
+                    TicketNumber = Convert.ToInt32(ticketNumber), 
+                    DateOfTicketIssue = DateTime.Now.ToString("dd.MM.yyyy") 
+                };
 
                 db.Readers.Add(reader); //adding
-                db.SaveChanges(); //saving changes       
+                db.SaveChanges(); //saving changes                 
             }
             MessageBox.Show("Saved");
         }
@@ -150,6 +159,7 @@ namespace Library
                 db.SaveChanges();
             }
         }
+
         public void DeleteReader(int id)
         {
             using (MyDbContext db = new MyDbContext())
@@ -159,6 +169,20 @@ namespace Library
                 db.SaveChanges();
             }
             MessageBox.Show("Deleted");
+        }
+
+        public void EditReader(Reader reader, string lName, string fName, string mName, int ticketNum)
+        {
+            using (MyDbContext db = new MyDbContext())
+            {
+                reader.LastName = lName;
+                reader.FirstName = fName;
+                reader.MiddleName = mName;
+                reader.TicketNumber = ticketNum;
+                
+                db.Entry(reader).State = EntityState.Modified;
+                db.SaveChanges();
+            }
         }
     }
 }
