@@ -23,13 +23,13 @@
         <DataGrid x:Name="RecordsGrid" HorizontalAlignment="Left" Height="435" Margin="646,128,0,0" VerticalAlignment="Top" Width="492" GridLinesVisibility="All" IsReadOnly="True" Background="#FF817B75" Grid.ColumnSpan="2"/>
         <Label Content="Readers" HorizontalAlignment="Left" Margin="270,73,0,0" VerticalAlignment="Top" Height="50" FontSize="36" Foreground="#FFE0E0E0" Width="133"/>
         <Label Content="Records" HorizontalAlignment="Left" Margin="826,67,0,0" VerticalAlignment="Top" FontSize="36" Foreground="#FFE0E0E0" Height="56" Width="134"/>
-        <Border BorderBrush="#FF0F141B" BorderThickness="1" HorizontalAlignment="Left" Height="5" Margin="0,73,-130,0" VerticalAlignment="Top" Width="1302" Background="#FF262130" Grid.ColumnSpan="4"/>
+        <Border BorderBrush="#FF0F141B" BorderThickness="1" HorizontalAlignment="Left" Height="5" Margin="0,73,0,0" VerticalAlignment="Top" Width="1172" Background="#FF262130" Grid.ColumnSpan="2"/>
         <Button x:Name="AddReaderBtn" Content="Add Reader" HorizontalAlignment="Left" Margin="26,586,0,0" VerticalAlignment="Top" Width="140" Background="#FF403455" BorderBrush="#FF0F141B" Click="AddReaderBtn_Click"/>
         <Button x:Name="EditButton" Content="Edit" HorizontalAlignment="Left" Margin="283,586,0,0" VerticalAlignment="Top" Width="82" Background="#FF403455" BorderBrush="#FF0F141B" Click="EditButton_Click"/>
         <Button x:Name="RemoveReadersButton" Content="Remove" HorizontalAlignment="Left" Margin="181,586,0,0" VerticalAlignment="Top" Width="86" Background="#FF403455" BorderBrush="#FF0F141B" Click="RemoveReadersButton_Click" IsEnabled="False"/>
         <Button x:Name="AddRecordBtn" Content="Add Record" HorizontalAlignment="Left" Margin="646,586,0,0" VerticalAlignment="Top" Width="140" Background="#FF403455" BorderBrush="#FF0F141B" IsEnabled="False" Click="AddRecordBtn_Click"/>
         <Button Content="Edit" HorizontalAlignment="Left" Margin="816,586,0,0" VerticalAlignment="Top" Width="74" Background="#FF403455" BorderBrush="#FF0F141B"/>
-        <Button x:Name="SaveButton" Content="Save" HorizontalAlignment="Left" Margin="381,586,0,0" VerticalAlignment="Top" Width="82" Background="#FF403455" BorderBrush="#FF0F141B" Click="SaveButton_Click" Visibility="Hidden"/>
+        
     </Grid>
 
 

@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using System.Data.SqlClient;
 using System.Data;
 using System.Data.Entity;
+using Library.DataAccessLayer;
 
 namespace Library
 {
@@ -28,22 +29,6 @@ namespace Library
         public MainWindow()
         {
             InitializeComponent();
-
-           
-
-            /*using (var context = new MyDbContext())
-            {
-                var reader = new Reader()
-                {
-                    LastName = "Polishchuk",
-                    FirstName = "Andriy",
-                    MiddleName = "Oleksiyovich",
-                    TicketNumber = 126,
-                    DateOfTicketIssue = new DateTime(2021, 2, 23).ToString("dd.MM.yyyy")
-                };
-                context.Readers.Add(reader);
-                context.SaveChanges();
-            }*/
             RecordsDt = new DataTable();
             RecordsDt.Columns.Add("Reader Name");
             RecordsDt.Columns.Add("Book");
@@ -61,14 +46,11 @@ namespace Library
             {
                 AddRecordBtn.IsEnabled = true;
                 RemoveReadersButton.IsEnabled = true;
-                using (var context = new MyDbContext())
-                {
-                    // Getting list of readers
-                    List<Reader> list = context.Readers.ToList<Reader>();
-                    // Calling method for loading data of chosen reader
-                    db.ChooseReader(list[ReadersGrid.SelectedIndex].Id, RecordsGrid, RecordsDt);
-                    readerId = list[ReadersGrid.SelectedIndex].Id;
-                }
+                // Getting list of readers
+                List<Reader> list = db.GetReaders();
+                // Calling method for loading data of chosen reader
+                db.ChooseReader(list[ReadersGrid.SelectedIndex].Id, RecordsGrid, RecordsDt);
+                readerId = list[ReadersGrid.SelectedIndex].Id;
             }
             catch (ArgumentOutOfRangeException) { }
         }
@@ -77,7 +59,7 @@ namespace Library
         {
             AddWindow addWindow = new AddWindow();
             addWindow.ShowDialog();
-            //Refreshing Data Table after saving changes
+
             db.BindDataGrid(ReadersGrid, RecordsGrid, RecordsDt); 
         }
 
@@ -85,54 +67,24 @@ namespace Library
         {
             AddRecordWindow wn = new AddRecordWindow(readerId);
             wn.ShowDialog();
+
+            db.BindDataGrid(ReadersGrid, RecordsGrid, RecordsDt);
         }
 
         private void RemoveReadersButton_Click(object sender, RoutedEventArgs e)
         {
-            using (var context = new MyDbContext())
-            {
-                List<Reader> list = context.Readers.ToList<Reader>();
-                db.DeleteReader(list[ReadersGrid.SelectedIndex].Id);
-                db.BindDataGrid(ReadersGrid, RecordsGrid, RecordsDt);
-            }
+            List<Reader> list = db.GetReaders();
+            db.DeleteReader(list[ReadersGrid.SelectedIndex].Id);
+            db.BindDataGrid(ReadersGrid, RecordsGrid, RecordsDt);
         }
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
-            using (var context = new MyDbContext())
-            {
-                List<Reader> list = context.Readers.ToList<Reader>();
-                EditWindow editWindow = new EditWindow(list[ReadersGrid.SelectedIndex]);
-                editWindow.ShowDialog();
-            }
+            List<Reader> list = db.GetReaders();
+            EditWindow editWindow = new EditWindow(list[ReadersGrid.SelectedIndex]);
+            editWindow.ShowDialog();
+
             db.BindDataGrid(ReadersGrid, RecordsGrid, RecordsDt);
-        }
-
-        private void SaveButton_Click(object sender, RoutedEventArgs e)
-        {
-            using (var context = new MyDbContext())
-            {
-                //List<Reader> list = context.Readers.ToList<Reader>();
-
-
-                /*foreach (Reader rdr in list)
-                {
-                    if (rdr.Id == readerId)
-                    {
-                        MessageBox.Show("Old: "+rdr.LastName);
-                        Dim cell As DataGridCell = TryCast()
-                        rdr.LastName = ;
-                        rdr.FirstName = list[ReadersGrid.SelectedIndex].FirstName;
-                        rdr.MiddleName = list[ReadersGrid.SelectedIndex].MiddleName;
-                        rdr.TicketNumber = list[ReadersGrid.SelectedIndex].TicketNumber;
-                        rdr.DateOfTicketIssue = list[ReadersGrid.SelectedIndex].DateOfTicketIssue;
-                        MessageBox.Show("New: " + ReadersGrid.SelectedItem.ToString());
-                        break;
-                    }
-                }*/
-                //context.SaveChanges();
-                //SaveButton.Visibility = Visibility.Hidden;
-            }
         }
     }
 }

@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Library.DataAccessLayer;
 
 namespace Library
 {
@@ -48,13 +49,13 @@ namespace Library
 
         private void BooksDataGrid_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            using (var context = new MyDbContext())
+            try
             {
-                // Getting list of readers
-                List<Reader> list = context.Readers.ToList<Reader>();
+                List<Book> list = db.GetBooks();
                 // Calling method for loading data of chosen reader
                 bookId = list[BooksDataGrid.SelectedIndex].Id;
             }
+            catch (ArgumentOutOfRangeException) { }
         }
     }
 }
