@@ -17,7 +17,12 @@ namespace Library
 {
     public partial class EditWindow : Window
     {
-        private DataBase db = new DataBase();
+        private IReaderRepository readerRepo = new ReaderRepository();
+        private IRecordRepository recordRepo = new RecordRepository();
+        private IBookRepository bookRepo = new BookRepository();
+        private IAuthorRepository authorRepo = new AuthorRepository();
+        private IBookAuthorRepository bookAuthorRepo = new BookAuthorRepository();
+        private DataBase db;
         private Reader reader { get; set; }
         public EditWindow(Reader reader)
         {
@@ -28,6 +33,8 @@ namespace Library
             FNameTextBox.Text = reader.FirstName;
             MNameTextBox.Text = reader.MiddleName;
             TicketTextBox.Text = Convert.ToString(reader.TicketNumber);
+
+            db = new DataBase(readerRepo, recordRepo, bookRepo, authorRepo, bookAuthorRepo);
         }
 
         private void ButtonSaveEdit_Click(object sender, RoutedEventArgs e)

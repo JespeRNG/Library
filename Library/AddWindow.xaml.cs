@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Library.DataAccessLayer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +17,12 @@ namespace Library
 {
     public partial class AddWindow : Window
     {
-        
+        private IReaderRepository readerRepo = new ReaderRepository();
+        private IRecordRepository recordRepo = new RecordRepository();
+        private IBookRepository bookRepo = new BookRepository();
+        private IAuthorRepository authorRepo = new AuthorRepository();
+        private IBookAuthorRepository bookAuthorRepo = new BookAuthorRepository();
+
         public AddWindow()
         {
             InitializeComponent();
@@ -28,8 +34,8 @@ namespace Library
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-            DataBase addr = new DataBase();
-            addr.AddReader(TextBoxFirstName.Text, TextBoxLastName.Text, TextBoxMiddleName.Text, TextBoxTicketNumber.Text);
+            DataBase db = new DataBase(readerRepo, recordRepo, bookRepo, authorRepo, bookAuthorRepo);
+            db.AddReader(TextBoxFirstName.Text, TextBoxLastName.Text, TextBoxMiddleName.Text, TextBoxTicketNumber.Text);
         }
     }
 }

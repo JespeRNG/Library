@@ -18,8 +18,13 @@ namespace Library
 {
     public partial class AddRecordWindow : Window
     {
+        private IReaderRepository readerRepo = new ReaderRepository();
+        private IRecordRepository recordRepo = new RecordRepository();
+        private IBookRepository bookRepo = new BookRepository();
+        private IAuthorRepository authorRepo = new AuthorRepository();
+        private IBookAuthorRepository bookAuthorRepo = new BookAuthorRepository();
         private int bookId { get; set; }
-        private DataBase db = new DataBase();
+        private DataBase db;
         private int readerId { get; set; }
         public AddRecordWindow(int readerId)
         {
@@ -36,6 +41,7 @@ namespace Library
             dt.Columns.Add("Total amount");
             dt.Columns.Add("Available amount");
 
+            db = new DataBase(readerRepo, recordRepo, bookRepo, authorRepo, bookAuthorRepo);
             db.LoadBooks(BooksDataGrid, dt);
         }
 
@@ -43,7 +49,7 @@ namespace Library
 
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
-            db.AddRecord(readerId, bookId, DatePicker.SelectedDate.Value.ToString("dd.MM.yyyy"));
+            db.AddRecord(readerId, bookId, DatePicker.SelectedDate.Value.Date);
             this.Close();
         }
 
@@ -51,7 +57,7 @@ namespace Library
         {
             try
             {
-                List<Book> list = db.GetBooks();
+                List<Book> list = db.GetBooksList();
                 // Calling method for loading data of chosen reader
                 bookId = list[BooksDataGrid.SelectedIndex].Id;
             }

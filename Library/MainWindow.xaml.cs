@@ -22,7 +22,12 @@ namespace Library
 {
     public partial class MainWindow : Window
     {
-        private DataBase db = new DataBase();
+        private IReaderRepository readerRepo = new ReaderRepository();
+        private IRecordRepository recordRepo = new RecordRepository();
+        private IBookRepository bookRepo = new BookRepository();
+        private IAuthorRepository authorRepo = new AuthorRepository();
+        private IBookAuthorRepository bookAuthorRepo = new BookAuthorRepository();
+        private DataBase db;
         private DataTable RecordsDt;
         private int readerId { get; set; }
         
@@ -36,8 +41,8 @@ namespace Library
             RecordsDt.Columns.Add("Date Of Return");
             RecordsDt.Columns.Add("Returned");
 
+            db = new DataBase(readerRepo, recordRepo, bookRepo, authorRepo, bookAuthorRepo);
             db.BindDataGrid(ReadersGrid, RecordsGrid, RecordsDt);
-            
         }
 
         private void DataGrid_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -47,7 +52,7 @@ namespace Library
                 AddRecordBtn.IsEnabled = true;
                 RemoveReadersButton.IsEnabled = true;
                 // Getting list of readers
-                List<Reader> list = db.GetReaders();
+                List<Reader> list = db.GetReadersList();
                 // Calling method for loading data of chosen reader
                 db.ChooseReader(list[ReadersGrid.SelectedIndex].Id, RecordsGrid, RecordsDt);
                 readerId = list[ReadersGrid.SelectedIndex].Id;
@@ -73,14 +78,14 @@ namespace Library
 
         private void RemoveReadersButton_Click(object sender, RoutedEventArgs e)
         {
-            List<Reader> list = db.GetReaders();
+            List<Reader> list = db.GetReadersList();
             db.DeleteReader(list[ReadersGrid.SelectedIndex].Id);
             db.BindDataGrid(ReadersGrid, RecordsGrid, RecordsDt);
         }
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
-            List<Reader> list = db.GetReaders();
+            List<Reader> list = db.GetReadersList();
             EditWindow editWindow = new EditWindow(list[ReadersGrid.SelectedIndex]);
             editWindow.ShowDialog();
 

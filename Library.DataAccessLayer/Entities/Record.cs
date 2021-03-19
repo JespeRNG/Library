@@ -11,8 +11,8 @@ namespace Library.DataAccessLayer
         public int Id { get; set; }
         public int ReaderId { get; set; }
         public int BookId { get; set; }
-        public string DateOfIssue { get; set; } // Date when the book was given to a reader
-        public string DateOfReturn { get; set; } // Date when the book should be returned
+        public DateTime DateOfIssue { get; set; } // Date when the book was given to a reader
+        public DateTime DateOfReturn { get; set; } // Date when the book should be returned
         public bool Returned { get; set; } // Is the book returned?
     }
 }

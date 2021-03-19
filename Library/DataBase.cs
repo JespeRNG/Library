@@ -11,48 +11,75 @@ using Library.DataAccessLayer;
 
 namespace Library
 {
-    public class DataBase: IDbRepository
+    public class DataBase
     {
-        private DbActions db = new DbActions();
-        private MyDbContext context = new MyDbContext();
+        private IReaderRepository readerRepo;
+        private IRecordRepository recordRepo;
+        private IBookRepository bookRepo;
+        private IAuthorRepository authorRepo;
+        private IBookAuthorRepository bookAuthorRepo;
 
-        public DataBase()
+        public DataBase(IReaderRepository readerRepo, IRecordRepository recordRepo, IBookRepository bookRepo, IAuthorRepository authorRepo, IBookAuthorRepository bookAuthorRepo)
         {
-            db = new DbActions();
+            this.readerRepo = readerRepo;
+            this.recordRepo = recordRepo;
+            this.bookRepo = bookRepo;
+            this.authorRepo = authorRepo;
+            this.bookAuthorRepo = bookAuthorRepo;
         }
 
-        // Method for Setting/Refreshing data tables
+        public void AddReader(string firstName, string lastName, string middleName, string ticketNumber)
+        {
+            readerRepo.AddReader(firstName, lastName, middleName, ticketNumber);
+        }
+
+        public void AddRecord(int readerId, int bookId, DateTime date)
+        {
+            recordRepo.AddRecord(readerId, bookId, date);
+        }
+
+        public void DeleteReader(int id)
+        {
+            readerRepo.DeleteReader(id);
+        }
+
+        public void EditReader(Reader reader, string lName, string fName, string mName, int ticketNum)
+        {
+            readerRepo.EditReader(reader, lName, fName, mName, ticketNum);
+        }
+
         public void BindDataGrid(DataGrid ReadersGrid, DataGrid RecordsGrid, DataTable RecordsDt)
         {
             RecordsDt.Clear();
 
-            context.Readers.Load();
-            ReadersGrid.ItemsSource = context.Readers.Local;
+            readerRepo.Readers().Load();
+            ReadersGrid.ItemsSource = readerRepo.Readers().Local;
 
             DataRow row;
 
-           foreach (var record in context.Records.ToList<Record>()) // for every record in Records
-           {
-               var reader = (from r in context.Readers // Getting reader where reader.Id == record.ReaderId
-                             where r.Id == record.ReaderId
-                             select r).FirstOrDefault();
-               var book = (from b in context.Books // Getting reader where reader.Id == record.ReaderId
-                           where b.Id == record.BookId
-                           select b).First();
+            foreach (var record in recordRepo.Records().ToList<Record>()) // for every record in Records
+            {
+                var reader = (from r in readerRepo.Readers() // Getting reader where reader.Id == record.ReaderId
+                              where r.Id == record.ReaderId
+                              select r).FirstOrDefault();
 
-               row = RecordsDt.NewRow();
-               row["Reader Name"] = reader.LastName + ' ' + reader.FirstName[0] + ". " + reader.MiddleName[0] + '.';
-               row["Book"] = '"' + book.Name + '"';
-               row["Date of Issue"] = record.DateOfIssue;
-               row["Date Of Return"] = record.DateOfReturn;
+                var book = (from b in bookRepo.Books() // Getting reader where reader.Id == record.ReaderId
+                            where b.Id == record.BookId
+                            select b).First();
 
-               if (!record.Returned)
-                   row["Returned"] = "No";
-               else
-                   row["Returned"] = "Yes";
-               RecordsDt.Rows.Add(row);
-           }
-           RecordsGrid.ItemsSource = RecordsDt.DefaultView;
+                row = RecordsDt.NewRow();
+                row["Reader Name"] = reader.LastName + ' ' + reader.FirstName[0] + ". " + reader.MiddleName[0] + '.';
+                row["Book"] = '"' + book.Name + '"';
+                row["Date of Issue"] = record.DateOfIssue;
+                row["Date Of Return"] = record.DateOfReturn;
+
+                if (!record.Returned)
+                    row["Returned"] = "No";
+                else
+                    row["Returned"] = "Yes";
+                RecordsDt.Rows.Add(row);
+            }
+            RecordsGrid.ItemsSource = RecordsDt.DefaultView;
         }
 
         public void LoadBooks(DataGrid DataGrid, DataTable DataTable)
@@ -60,15 +87,15 @@ namespace Library
             DataTable.Clear();
             DataRow row;
 
-            foreach (var record in context.Books.ToList<Book>()) // for every record in Records
+            foreach (var record in bookRepo.Books().ToList()) // for every record in Records
             {
-                var bookAuthor = (from a in context.BooksAuthors 
-                                  where a.BookId == record.Id 
+                var bookAuthor = (from a in bookAuthorRepo.BooksAuthors()
+                                  where a.BookId == record.Id
                                   select a.AuthorId).First();
 
-                var author = (from a in context.Authors
+                var author = (from a in authorRepo.Authors()
                               where a.Id == bookAuthor
-                              select a.LastName).First() + " " + (from a in context.Authors
+                              select a.LastName).First() + " " + (from a in authorRepo.Authors()
                                                                   where a.Id == bookAuthor
                                                                   select a.FirstName).First();
                 row = DataTable.NewRow();
@@ -92,14 +119,15 @@ namespace Library
             RecordsDt.Clear();
             DataRow row;
 
-            foreach (var record in db.GetRecordsList())
+            foreach (var record in recordRepo.Records().ToList())
             {
-                if(record.ReaderId == id)
+                if (record.ReaderId == id)
                 {
-                    var reader = (from r in context.Readers
+                    var reader = (from r in readerRepo.Readers()
                                   where r.Id == id
                                   select r).First();
-                    var book = (from b in context.Books
+
+                    var book = (from b in bookRepo.Books()
                                 where b.Id == record.BookId
                                 select b).First();
 
@@ -118,40 +146,14 @@ namespace Library
             RecordsGrid.ItemsSource = RecordsDt.DefaultView;
         }
 
-        public void AddReader(string firstName, string lastName, string middleName, string ticketNumber)
+        public List<Reader> GetReadersList()
         {
-            
-            db.AddReader(firstName, lastName, middleName, ticketNumber);
+            return readerRepo.Readers().ToList();
         }
 
-        public void AddRecord(int readerId, int bookId, string date)
+        public List<Book> GetBooksList()
         {
-            db.AddRecord(readerId, bookId, date);
-        }
-
-        public void DeleteReader(int id)
-        {
-            db.DeleteReader(id);
-        }
-
-        public void EditReader(Reader reader, string lName, string fName, string mName, int ticketNum)
-        {
-            db.EditReader(reader, lName, fName, mName, ticketNum);
-        }
-
-        public List<Record> GetRecords()
-        {
-            return db.GetRecordsList();
-        }
-
-        public List<Reader> GetReaders()
-        {
-            return db.GetReadersList();
-        }
-
-        public List<Book> GetBooks()
-        {
-            return db.GetBooksList();
+            return bookRepo.Books().ToList();
         }
     }
 }
