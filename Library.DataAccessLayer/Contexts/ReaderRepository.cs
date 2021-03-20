@@ -10,24 +10,14 @@ namespace Library.DataAccessLayer
     public class ReaderRepository : IReaderRepository
     {
         private MyDbContext context = new MyDbContext();
-        public void AddReader(string firstName, string lastName, string middleName, string ticketNumber)
+        public void AddReader(Reader reader)
         {
-            Reader reader = new Reader
-            {
-                FirstName = firstName,
-                LastName = lastName,
-                MiddleName = middleName,
-                TicketNumber = Convert.ToInt32(ticketNumber),
-                DateOfTicketIssue = DateTime.Today
-            };
-
             context.Readers.Add(reader); //adding
             context.SaveChanges(); //saving changes
         }
 
-        public void DeleteReader(int id)
+        public void DeleteReader(Reader reader)
         {
-            Reader reader = context.Readers.Find(id);
             context.Readers.Remove(reader);
             context.SaveChanges();
         }

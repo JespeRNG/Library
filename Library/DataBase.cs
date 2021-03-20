@@ -28,9 +28,9 @@ namespace Library
             this.bookAuthorRepo = bookAuthorRepo;
         }
 
-        public void AddReader(string firstName, string lastName, string middleName, string ticketNumber)
+        public void AddReader(Reader reader)
         {
-            readerRepo.AddReader(firstName, lastName, middleName, ticketNumber);
+            readerRepo.AddReader(reader);
         }
 
         public void AddRecord(int readerId, int bookId, DateTime date)
@@ -38,9 +38,9 @@ namespace Library
             recordRepo.AddRecord(readerId, bookId, date);
         }
 
-        public void DeleteReader(int id)
+        public void DeleteReader(Reader reader)
         {
-            readerRepo.DeleteReader(id);
+            readerRepo.DeleteReader(reader);
         }
 
         public void EditReader(Reader reader, string lName, string fName, string mName, int ticketNum)

@@ -35,7 +35,15 @@ namespace Library
         {
             this.Close();
             DataBase db = new DataBase(readerRepo, recordRepo, bookRepo, authorRepo, bookAuthorRepo);
-            db.AddReader(TextBoxFirstName.Text, TextBoxLastName.Text, TextBoxMiddleName.Text, TextBoxTicketNumber.Text);
+            Reader reader = new Reader
+            {
+                FirstName = TextBoxFirstName.Text,
+                LastName = TextBoxLastName.Text,
+                MiddleName = TextBoxMiddleName.Text,
+                TicketNumber = Convert.ToInt32(TextBoxTicketNumber.Text),
+                DateOfTicketIssue = DateTime.Today
+            };
+            db.AddReader(reader);
         }
     }
 }

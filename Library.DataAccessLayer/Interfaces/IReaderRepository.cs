@@ -9,8 +9,8 @@ namespace Library.DataAccessLayer
 {
     public interface IReaderRepository
     {
-        void AddReader(string firstName, string lastName, string middleName, string ticketNumber);
-        void DeleteReader(int id);
+        void AddReader(Reader reader);
+        void DeleteReader(Reader reader);
         void EditReader(Reader reader, string lName, string fName, string mName, int ticketNum);
         DbSet<Reader> Readers();
     }

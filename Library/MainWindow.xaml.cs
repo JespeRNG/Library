@@ -79,7 +79,7 @@ namespace Library
         private void RemoveReadersButton_Click(object sender, RoutedEventArgs e)
         {
             List<Reader> list = db.GetReadersList();
-            db.DeleteReader(list[ReadersGrid.SelectedIndex].Id);
+            db.DeleteReader(list[ReadersGrid.SelectedIndex]);
             db.BindDataGrid(ReadersGrid, RecordsGrid, RecordsDt);
         }
 
