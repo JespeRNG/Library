@@ -16,6 +16,17 @@ namespace Library.DataAccessLayer
         public DbSet<Reader> Readers { get; set; }
         public DbSet<Record> Records { get; set; }
         public DbSet<Author> Authors { get; set; }
-        public DbSet<BookAuthor> BooksAuthors { get; set; }
+        public DbSet<BookAuthor> BookAuthors { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Configurations.Add(new BookConfiguration());
+            modelBuilder.Configurations.Add(new ReaderConfiguration());
+            modelBuilder.Configurations.Add(new RecordConfiguration());
+            modelBuilder.Configurations.Add(new AuthorConfiguration());
+            modelBuilder.Configurations.Add(new BookAuthorConfiguration());
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

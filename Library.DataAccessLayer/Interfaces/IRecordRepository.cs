@@ -9,7 +9,7 @@ namespace Library.DataAccessLayer
 {
     public interface IRecordRepository
     {
-        void AddRecord(int readerId, int bookId, DateTime date);
+        void AddRecord(Record record);
         DbSet<Record> Records();
     }
 }

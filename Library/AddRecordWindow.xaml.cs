@@ -23,7 +23,7 @@ namespace Library
         private IBookRepository bookRepo = new BookRepository();
         private IAuthorRepository authorRepo = new AuthorRepository();
         private IBookAuthorRepository bookAuthorRepo = new BookAuthorRepository();
-        private int bookId { get; set; }
+        private Book book { get; set; }
         private DataBase db;
         private int readerId { get; set; }
         public AddRecordWindow(int readerId)
@@ -49,7 +49,15 @@ namespace Library
 
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
-            db.AddRecord(readerId, bookId, DatePicker.SelectedDate.Value.Date);
+            Record record = new Record()
+            {
+                ReaderId = readerId,
+                BookId = book.Id,
+                DateOfIssue = DateTime.Today,
+                DateOfReturn = DatePicker.SelectedDate.Value.Date,
+                Returned = false
+            };
+            db.AddRecord(record);
             this.Close();
         }
 
@@ -59,7 +67,7 @@ namespace Library
             {
                 List<Book> list = db.GetBooksList();
                 // Calling method for loading data of chosen reader
-                bookId = list[BooksDataGrid.SelectedIndex].Id;
+                book = list[BooksDataGrid.SelectedIndex];
             }
             catch (ArgumentOutOfRangeException) { }
         }

@@ -33,9 +33,9 @@ namespace Library
             readerRepo.AddReader(reader);
         }
 
-        public void AddRecord(int readerId, int bookId, DateTime date)
+        public void AddRecord(Record record)
         {
-            recordRepo.AddRecord(readerId, bookId, date);
+            recordRepo.AddRecord(record);
         }
 
         public void DeleteReader(Reader reader)

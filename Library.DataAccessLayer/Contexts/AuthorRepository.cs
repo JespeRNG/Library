@@ -11,6 +11,11 @@ namespace Library.DataAccessLayer
     {
         private MyDbContext context = new MyDbContext();
 
+        public AuthorRepository()
+        {
+
+        }
+
         public DbSet<Author> Authors()
         {
             return context.Authors;

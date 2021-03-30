@@ -12,7 +12,7 @@ namespace Library.DataAccessLayer
         private MyDbContext context = new MyDbContext();
         public DbSet<BookAuthor> BooksAuthors()
         {
-            return context.BooksAuthors;
+            return context.BookAuthors;
         }
     }
 }

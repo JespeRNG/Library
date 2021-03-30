@@ -58,6 +58,11 @@
     <Compile Include="Entities\Author.cs" />
     <Compile Include="Entities\Book.cs" />
     <Compile Include="Entities\BookAuthor.cs" />
+    <Compile Include="EntityConfigurations\AuthorConfiguration.cs" />
+    <Compile Include="EntityConfigurations\BookAuthorConfiguration.cs" />
+    <Compile Include="EntityConfigurations\BookConfiguration.cs" />
+    <Compile Include="EntityConfigurations\ReaderConfiguration.cs" />
+    <Compile Include="EntityConfigurations\RecordConfiguration.cs" />
     <Compile Include="Interfaces\IAuthorRepository.cs" />
     <Compile Include="Interfaces\IBookAuthorRepository.cs" />
     <Compile Include="Interfaces\IBookRepository.cs" />
