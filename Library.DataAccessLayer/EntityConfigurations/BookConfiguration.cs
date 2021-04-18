@@ -4,6 +4,7 @@ using System.Data.Entity.ModelConfiguration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace Library.DataAccessLayer
 {
@@ -13,6 +14,8 @@ namespace Library.DataAccessLayer
         {
             this.ToTable("Books");
             this.Property(b => b.Name).HasMaxLength(20);
+            this.HasKey(b => b.Id)
+                .HasIndex(i => i.Id);
         }
     }
 }

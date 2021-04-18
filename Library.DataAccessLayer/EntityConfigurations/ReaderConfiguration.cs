@@ -16,6 +16,8 @@ namespace Library.DataAccessLayer
             this.Property(r => r.LastName).HasMaxLength(20);
             this.Property(r => r.MiddleName).HasMaxLength(20);
             this.Property(r => r.FirstName).HasMaxLength(20);
+            this.HasKey(r => r.Id)
+                .HasIndex(i => i.Id);
         }
     }
 }

@@ -12,6 +12,8 @@ namespace Library.DataAccessLayer
         public RecordConfiguration()
         {
             this.ToTable("Records");
+            this.HasKey(r => r.Id)
+                .HasIndex(i => i.Id);
         }
     }
 }

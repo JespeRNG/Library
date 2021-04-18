@@ -12,6 +12,8 @@ namespace Library.DataAccessLayer
         public AuthorConfiguration()
         {
             this.ToTable("Authors");
+            this.HasKey(a => a.Id)
+                .HasIndex(i => i.Id);
         }
     }
 }

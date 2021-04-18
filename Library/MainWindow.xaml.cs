@@ -30,7 +30,7 @@ namespace Library
         private DataBase db;
         private DataTable RecordsDt;
         private int readerId { get; set; }
-        
+
         public MainWindow()
         {
             InitializeComponent();
